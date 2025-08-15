@@ -1,0 +1,57 @@
+# Design Team Pod Volume Configurations
+# Quadlet volume definitions for persistent data
+
+[Unit]
+Description=Design Team Pod Workspace Volume
+Documentation=https://github.com/xwander-platform/design-team-pod
+
+[Volume]
+VolumeName=design-team-workspace
+Driver=local
+
+# Volume options for performance and security
+Options=type=bind,source=/data/design-team/workspace,bind-propagation=rprivate
+Options=uid=1000,gid=1000
+
+# Backup and maintenance labels
+Label=com.xwander.component=design-team-pod
+Label=com.xwander.data-type=workspace
+Label=com.xwander.backup=daily
+
+---
+
+[Unit]
+Description=Design Team Pod Knowledge Volume
+Documentation=https://github.com/xwander-platform/design-team-pod
+
+[Volume]
+VolumeName=design-team-knowledge
+Driver=local
+
+# Volume options
+Options=type=bind,source=/data/design-team/knowledge,bind-propagation=rprivate
+Options=uid=1000,gid=1000
+
+# Labels
+Label=com.xwander.component=design-team-pod
+Label=com.xwander.data-type=knowledge
+Label=com.xwander.backup=weekly
+
+---
+
+[Unit]
+Description=Design Team Pod Config Volume
+Documentation=https://github.com/xwander-platform/design-team-pod
+
+[Volume]
+VolumeName=design-team-config
+Driver=local
+
+# Volume options
+Options=type=bind,source=/data/design-team/config,bind-propagation=rprivate
+Options=uid=1000,gid=1000
+
+# Labels
+Label=com.xwander.component=design-team-pod
+Label=com.xwander.data-type=config
+Label=com.xwander.backup=weekly

@@ -1,0 +1,25 @@
+# Design Team Pod Network Configuration
+# Quadlet network definition for secure container networking
+
+[Unit]
+Description=Design Team Pod Network
+Documentation=https://github.com/xwander-platform/design-team-pod
+
+[Network]
+# Network configuration
+NetworkName=design-team-net
+Driver=bridge
+
+# Subnet configuration (isolated from host)
+Subnet=10.89.0.0/16
+Gateway=10.89.0.1
+
+# Security options
+Internal=false
+DisableDNS=false
+IPv6=false
+
+# Network policies
+Options=com.docker.network.bridge.enable_icc=true
+Options=com.docker.network.bridge.enable_ip_masquerade=true
+Options=com.docker.network.bridge.host_binding_ipv4=127.0.0.1

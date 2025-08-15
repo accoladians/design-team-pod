@@ -1,0 +1,79 @@
+# Design Team Pod Quadlet Configuration
+# Systemd container service definition for production deployment
+
+[Unit]
+Description=Design Team Pod - Pixel-Perfect Cloning Toolkit
+Documentation=https://github.com/xwander-platform/design-team-pod
+After=network-online.target
+Wants=network-online.target
+
+[Container]
+# Image configuration
+Image=localhost/design-team-pod:latest
+ContainerName=design-team-pod
+
+# Security configuration (rootless, minimal capabilities)
+User=1000:1000
+ReadOnly=true
+DropCapability=ALL
+AddCapability=NET_BIND_SERVICE
+SecurityOpt=no-new-privileges:true
+SecurityOpt=label=type:container_runtime_t
+
+# Network configuration
+PublishPort=127.0.0.1:8081:8080
+Network=design-team-net
+
+# Volume mounts (persistent data)
+Volume=design-team-workspace:/app/workspace:Z
+Volume=design-team-knowledge:/app/knowledge:Z
+Volume=design-team-config:/app/config:Z
+
+# Temporary directories (in-memory for security)
+Tmpfs=/tmp:rw,noexec,nosuid,size=1g
+Tmpfs=/app/cache:rw,noexec,nosuid,size=2g
+
+# Environment variables
+Environment=API_HOST=0.0.0.0
+Environment=API_PORT=8080
+Environment=LOG_LEVEL=info
+Environment=WORKSPACE_DIR=/app/workspace
+Environment=PYTHONPATH=/app/tools:/app/api
+
+# Resource limits
+Memory=4G
+CPUs=2.0
+PidsLimit=200
+
+# Secrets (if using podman secrets)
+Secret=anthropic-key,type=env,target=ANTHROPIC_API_KEY
+Secret=openai-key,type=env,target=OPENAI_API_KEY
+
+# Health check
+HealthCmd=/usr/bin/curl -f http://localhost:8080/health || exit 1
+HealthInterval=30s
+HealthTimeout=10s
+HealthRetries=3
+HealthStartPeriod=60s
+
+[Service]
+# Service configuration
+Type=notify
+Restart=always
+RestartSec=5
+TimeoutStartSec=300
+TimeoutStopSec=60
+
+# Logging
+SyslogIdentifier=design-team-pod
+StandardOutput=journal
+StandardError=journal
+
+# Security
+NoNewPrivileges=true
+PrivateDevices=true
+ProtectHome=true
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

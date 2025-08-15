@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "analysis_timestamp": 1755261158.7297566,
+    "tool_versions": {
+      "imagemagick": "Version check failed",
+      "perceptualdiff": "Not available",
+      "dssim": "Not available",
+      "butteraugli": "Not available",
+      "vips": "vips-8.12.1-Wed Feb  2 14:43:28 UTC 2022"
+    },
+    "image_info": {
+      "image1": {
+        "path": "/home/joni/jtools/production_winter_latest.png",
+        "size": [
+          1280,
+          4063
+        ],
+        "mode": "RGB",
+        "format": "PNG"
+      },
+      "image2": {
+        "path": "/home/joni/jtools/sandbox_winter_with_partners.png",
+        "size": [
+          1280,
+          1812
+        ],
+        "mode": "RGB",
+        "format": "PNG"
+      }
+    }
+  },
+  "tool_results": {
+    "imagemagick": {
+      "tool": "ImageMagick",
+      "ssim": 0.0,
+      "psnr": 0.0,
+      "mae": "0",
+      "diff_image": "imagemagick_diff.png",
+      "interpretation": "Poor similarity (<80%)"
+    },
+    "vips": {
+      "tool": "vips",
+      "statistics": {
+        "avg_difference": 44.87334000000001,
+        "avg_image1": 235.602834,
+        "avg_image2": 190.729494,
+        "deviation_difference": 35.80244600000001,
+        "deviation_image1": 55.46715,
+        "deviation_image2": 91.269596,
+        "similarity_estimate": 0.8240261176470588
+      },
+      "interpretation": "Statistical similarity: 82.40%"
+    }
+  },
+  "ai_analysis": {
+    "claude_analysis": {
+      "overall_similarity": "70.0%",
+      "readiness_assessment": "Significant Issues - Major differences present",
+      "critical_issues": [
+        "Low SSIM score (0.000) indicates structural differences"
+      ],
+      "recommendations": [
+        "Review color accuracy and ensure consistent color profiles",
+        "Check image compression settings and quality levels",
+        "Verify font rendering and text positioning",
+        "Analyze layout spacing and alignment precision",
+        "Consider implementing automated screenshot comparison",
+        "Review responsive breakpoints and media queries",
+        "Check for missing or incorrectly sized assets",
+        "Audit CSS inheritance and specificity issues"
+      ],
+      "confidence": "Medium"
+    },
+    "synthesis": {
+      "tools_used": [
+        "imagemagick",
+        "vips"
+      ],
+      "tools_failed": [],
+      "consensus": "Strong consensus: Significant differences detected",
+      "confidence_level": 1.0,
+      "next_steps": [
+        "Install missing visual diff tools for more comprehensive analysis",
+        "Generate detailed diff images for visual inspection",
+        "Run analysis on additional page sections",
+        "Test responsive breakpoints",
+        "Validate cross-browser consistency"
+      ]
+    }
+  },
+  "summary": {
+    "timestamp": 1755261158.7297509,
+    "image1": "/home/joni/jtools/production_winter_latest.png",
+    "image2": "/home/joni/jtools/sandbox_winter_with_partners.png",
+    "tools_available": 2,
+    "tools_used": 2,
+    "overall_assessment": "70.0%",
+    "readiness": "Significant Issues - Major differences present",
+    "critical_issues_count": 1,
+    "recommendations_count": 8
+  },
+  "output_directory": "visual_comparison_updated"
+}
